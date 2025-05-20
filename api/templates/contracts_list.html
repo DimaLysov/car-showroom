@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'index.html' %}
+
+{% block title %}Договоры{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Договоры</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Менеджер</th>
+            <th>Автомобиль</th>
+            <th>Дата</th>
+            <th>Способ оплаты</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contract in contracts %}
+        <tr>
+            <td>{{ contract.client.name }}</td>
+            <td>{{ contract.manager.name }}</td>
+            <td>{{ contract.sku.car.brand }} {{ contract.sku.car.model }}</td>
+            <td>{{ contract.date|date:"d.m.Y H:i" }}</td>
+            <td>{{ contract.get_payment_method_display }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

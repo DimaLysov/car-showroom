@@ -18,3 +18,7 @@ class Contract(models.Model):
 
     def __str__(self):
         return f'{self.client} - {self.manager} ({self.date})'
+
+    class Meta:
+        verbose_name = 'контракт'
+        verbose_name_plural= 'Контракты'

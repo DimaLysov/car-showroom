@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'index.html' %}
+
+{% block title %}Наши менеджеры{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Наши менеджеры</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Продано авто</th>
+            <th>Дата найма</th>
+            <th>Зарплата</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for manager in managers %}
+        <tr>
+            <td>{{ manager.name }}</td>
+            <td>{{ manager.phone }}</td>
+            <td>{{ manager.sold_cars }}</td>
+            <td>{{ manager.date_employment|date:"d.m.Y" }}</td>
+            <td>{{ manager.salary }} ₽</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

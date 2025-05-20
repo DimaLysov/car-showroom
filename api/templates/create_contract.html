@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'index.html' %}
+
+{% block title %}Оформление договора{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h1 class="mb-4">Оформление договора</h1>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ sku.car.brand }} {{ sku.car.model }}</h5>
+                <p class="card-text">
+                    Год: {{ sku.year|date:"Y" }}<br>
+                    Цвет: {{ sku.color }}<br>
+                    Цена: {{ sku.price }} ₽
+                </p>
+            </div>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Подтвердить покупку</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

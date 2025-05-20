@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'index.html' %}
+
+{% block title %}{{ car.brand }} {{ car.model }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h1>{{ car.brand }} {{ car.model }}</h1>
+        <p>В наличии: {{ car.count }} шт.</p>
+        
+        <h3 class="mt-4">Доступные варианты</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Год</th>
+                    <th>Цвет</th>
+                    <th>Цена</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sku in car.sku_set.all %}
+                <tr>
+                    <td>{{ sku.year }}</td>
+                    <td>{{ sku.color }}</td>
+                    <td>{{ sku.price }} ₽</td>
+                    <td>
+                        <a href="{% url 'create_contract' sku.id %}" class="btn btn-sm btn-success">Купить</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <!-- Здесь можно добавить изображение автомобиля -->
+        <img src="https://via.placeholder.com/600x400?text={{ car.brand }}+{{ car.model }}" 
+             alt="{{ car.brand }} {{ car.model }}" class="img-fluid">
+    </div>
+</div>
+{% endblock %}
